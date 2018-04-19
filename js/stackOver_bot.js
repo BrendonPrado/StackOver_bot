@@ -51,7 +51,7 @@ bot.hears(/Sim, quero saber mais sobre (.+)/,c=>{
     c.reply(`${s_mais[ob]}`,Markup.keyboard([`Continuar`]).resize().oneTime().extra())
 })
 bot.on('text',c=>{
-    c.reply(`Escolha uma linguagem: ${c.update.message.from.first_name}`,botoes())
+    c.reply(`Escolha uma linguagem:`,botoes())
 
 })
 bot.startPolling()
