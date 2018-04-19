@@ -48,7 +48,7 @@ bot.action(/chama (.+)/,c =>{
 })
 bot.hears(/Sim, quero saber mais sobre (.+)/,c=>{
     const ob  = ops.findIndex(k =>k==c.update.message.text.slice(28))
-    c.reply(`${s_mais[ob].slice(4096*i,4096*(i+1))}`,Markup.keyboard([`Continuar`]).resize().oneTime().extra())
+    c.reply(`${s_mais[ob]}`,Markup.keyboard([`Continuar`]).resize().oneTime().extra())
 })
 bot.on('text',c=>{
     c.reply(`Escolha uma linguagem: ${c.update.message.from.first_name}`,botoes())
