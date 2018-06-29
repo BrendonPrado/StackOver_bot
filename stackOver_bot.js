@@ -1,12 +1,12 @@
-const token = process.env.TOKEN;
+const env = require('../.env')
 const telegraf = require('telegraf')
 const extra = require('telegraf/extra')
 const sqlite3 = require('sqlite3').verbose()
 const docx = require("docx")
 const fs = require("fs")
 const Markup = require('telegraf/markup')
-const bot = new telegraf(token)
-let db = new sqlite3.Database('cont.db')
+const bot = new telegraf(env.token)
+let db = new sqlite3.Database('../cont.db')
   
 let sql = `Select DISTINCT titulo  tit
 from conteudo;`
@@ -23,11 +23,11 @@ const botoes = () => extra.markup(Markup.inlineKeyboard(
     ops.map(item=> Markup.callbackButton(item,`chama ${item}`)),
     {columns:4}
 ))
-bot.start(c =>{
+bot.start(async c =>{
     c.reply(`Bem vindo ${c.update.message.from.first_name} \n Escolha uma linguagem:`,botoes(),`Em caso de duvidas 'help' para ajuda`)
 
 })
-bot.action(/chama (.+)/,c =>{
+bot.action(/chama (.+)/, c =>{
     let  sql = `Select cont con from conteudo where titulo = ? `
     let param = c.match[1]
     db.get(sql,param,(err,row)=>{
@@ -79,7 +79,7 @@ bot.hears(/Sim, quero saber mais sobre (.+)/,c=>{
 })
 
 
-bot.hears(/help/,c =>{
+bot.hears(/help/,async c =>{
     c.reply(`O objetivo deste chat bot é auxiliar desenvolvedores fornecendo exemplos de código e de sintaxe de diversas linguagens. Além da interação online, também é possível realizar o download dos materiais para consultas offline.\n\n
     Desenvolvido por Brendon Prado e Matheus Rocha 2018.`,Markup.keyboard([`Continuar`]).resize().oneTime().extra())  
 })
