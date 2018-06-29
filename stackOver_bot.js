@@ -23,7 +23,7 @@ const botoes = () => extra.markup(Markup.inlineKeyboard(
     ops.map(item=> Markup.callbackButton(item,`chama ${item}`)),
     {columns:4}
 ))
-bot.start(async c =>{
+bot.start(c =>{
     c.reply(`Bem vindo ${c.update.message.from.first_name} \n Escolha uma linguagem:`,botoes(),`Em caso de duvidas 'help' para ajuda`)
 
 })
