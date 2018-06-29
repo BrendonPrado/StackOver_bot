@@ -1,12 +1,13 @@
-const env = require('../.env')
+
+const token = process.env.TOKEN;
 const telegraf = require('telegraf')
 const extra = require('telegraf/extra')
 const sqlite3 = require('sqlite3').verbose()
 const docx = require("docx")
 const fs = require("fs")
 const Markup = require('telegraf/markup')
-const bot = new telegraf(env.token)
-let db = new sqlite3.Database('../cont.db')
+const bot = new telegraf(token)
+let db = new sqlite3.Database('cont.db')
   
 let sql = `Select DISTINCT titulo  tit
 from conteudo;`
