@@ -27,7 +27,7 @@ bot.start(async c =>{
     c.reply(`Bem vindo ${c.update.message.from.first_name} \n Escolha uma linguagem:`,botoes(),`Em caso de duvidas 'help' para ajuda`)
 
 })
-bot.action(/chama (.+)/, async c =>{
+bot.action(/chama (.+)/,c =>{
     let  sql = `Select cont con from conteudo where titulo = ? `
     let param = c.match[1]
     db.get(sql,param,(err,row)=>{
@@ -48,9 +48,9 @@ bot.action(/chama (.+)/, async c =>{
          }
       }
 })
-   await c.reply(`Quer Saber Mais, ou conteudo em docx?`,  Markup.keyboard([`Sim, quero saber mais sobre ${c.match[1]}`,`Sim, quero o doc de ${c.match[1]}`,`Não`]).resize().oneTime().extra())  
+   c.reply(`Quer Saber Mais, ou conteudo em docx?`,  Markup.keyboard([`Sim, quero saber mais sobre ${c.match[1]}`,`Sim, quero o doc de ${c.match[1]}`,`Não`]).resize().oneTime().extra())  
 })
-bot.hears(/Sim, quero o doc de (.+)/,async c=>{
+bot.hears(/Sim, quero o doc de (.+)/,c=>{
     let  sql = `Select cont con from conteudo where titulo = ? `
     let param = c.update.message.text.slice(20)
     db.get(sql,param,(err,row)=>{
@@ -79,7 +79,7 @@ bot.hears(/Sim, quero saber mais sobre (.+)/,c=>{
 })
 
 
-bot.hears(/help/,async c =>{
+bot.hears(/help/,c =>{
     c.reply(`O objetivo deste chat bot é auxiliar desenvolvedores fornecendo exemplos de código e de sintaxe de diversas linguagens. Além da interação online, também é possível realizar o download dos materiais para consultas offline.\n\n
     Desenvolvido por Brendon Prado e Matheus Rocha 2018.`,Markup.keyboard([`Continuar`]).resize().oneTime().extra())  
 })
