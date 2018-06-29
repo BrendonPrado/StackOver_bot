@@ -67,8 +67,8 @@ bot.hears(/Sim, quero o doc de (.+)/,c=>{
         exporter.pack(`${c.update.message.text.slice(20)}`)
 
     })
+    c.reply(`Quer Saber Mais? (estamos fazendo seu docx) :)`,  Markup.keyboard([`Sim, quero saber mais sobre ${c.match[1]}`,'não']).resize().oneTime().extra())
     c.replyWithDocument({source:`${c.update.message.text.slice(20)}.docx`})
-    c.reply(`Quer Saber Mais? (estamos fazendo seu docx) :)`,  Markup.keyboard([`Sim, quero saber mais sobre ${c.match[1]}`,'não']).resize().oneTime().extra())  
 })
 bot.hears(/Sim, quero saber mais sobre (.+)/,c=>{
     let  sql = `Select s_mais mais from conteudo where titulo = ? `
