@@ -27,7 +27,7 @@ bot.start(c =>{
     c.reply(`Bem vindo ${c.update.message.from.first_name} \n Escolha uma linguagem:`,botoes(),`Em caso de duvidas 'help' para ajuda`)
 
 })
-bot.action(/chama (.+)/, async c =>{
+bot.action(/chama (.+)/,c =>{
     let  sql = `Select cont con from conteudo where titulo = ? `
     let param = c.match[1]
     db.get(sql,param,(err,row)=>{
@@ -47,7 +47,7 @@ bot.action(/chama (.+)/, async c =>{
          }
       }
 })
-   await c.reply(`Quer Saber Mais, ou conteudo em docx?`,Markup.keyboard([`Sim, quero saber mais sobre ${c.match[1]}`,`Sim, quero o doc de ${c.match[1]}`,`Não`]).resize().oneTime().extra())  
+   c.reply(`Quer Saber Mais, ou conteudo em docx?`,Markup.keyboard([`Sim, quero saber mais sobre ${c.match[1]}`,`Sim, quero o doc de ${c.match[1]}`,`Não`]).resize().oneTime().extra())  
 })
 bot.hears(/Sim, quero o doc de (.+)/, async c=>{
     let  sql = `Select cont con from conteudo where titulo = ? `
