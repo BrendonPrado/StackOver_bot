@@ -1,4 +1,4 @@
-const env = process.env.TOKEN
+const token = process.env.TOKEN
 const telegraf = require('telegraf')
 const extra = require('telegraf/extra')
 const sqlite3 = require('sqlite3').verbose()
